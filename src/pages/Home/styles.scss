@@ -1,0 +1,9 @@
+@import "../../styles/variables.scss";
+
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: $spacing-20;
+}

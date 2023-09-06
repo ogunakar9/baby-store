@@ -1,0 +1,25 @@
+@import "../../styles/variables.scss";
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 400px;
+  width: 300px;
+  gap: $spacing-20;
+
+  &__image {
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
+  }
+
+  &__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-align: center;
+    min-height: $spacing-54;
+  }
+}
