@@ -1,5 +1,5 @@
-import "./styles.scss";
-import { ICardProps } from "./types";
+import './styles.scss';
+import { ICardProps } from './types';
 
 const Card = (props: ICardProps) => {
   const { id, title, price, description, category, image, rating } = props;
