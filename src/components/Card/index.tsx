@@ -1,6 +1,7 @@
 import './styles.scss';
 import { ICardProps } from './types';
 import Button from '../Button';
+import StarBorderPurple500Icon from '@mui/icons-material/StarBorderPurple500';
 
 const Card = (props: ICardProps) => {
   const { id, title, price, description, category, image, rating } = props;
@@ -17,9 +18,12 @@ const Card = (props: ICardProps) => {
 
   return (
     <div className="card">
-      <div>
-        <img className="card__image" src={image} alt={title} />
-        <span className="card__image__rating">{rate}</span>
+      <div className="card__image">
+        <img className="card__image__el" src={image} alt={title} />
+        <div className="card__image__rating">
+          <span className="card__image__rating__text">{rate}</span>
+          <StarBorderPurple500Icon className="card__image__rating__icon" />
+        </div>
       </div>
       <div className="card__title">
         <span className="card__title__text">{title}</span>
