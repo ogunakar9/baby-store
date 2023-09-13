@@ -17,7 +17,10 @@ const Card = (props: ICardProps) => {
 
   return (
     <div className="card">
-      <img className="card__image" src={image} alt={title} />
+      <div>
+        <img className="card__image" src={image} alt={title} />
+        <span className="card__image__rating">{rate}</span>
+      </div>
       <div className="card__title">
         <span className="card__title__text">{title}</span>
       </div>
