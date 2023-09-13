@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .card {
   display: flex;
@@ -8,6 +8,9 @@
   height: 400px;
   width: 300px;
   gap: $spacing-20;
+  border: $spacing-1 solid $grey;
+  border-radius: $spacing-8;
+  padding: 1rem;
 
   &__image {
     height: 200px;
@@ -16,10 +19,44 @@
   }
 
   &__title {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-align: center;
     min-height: $spacing-54;
+    position: relative;
+
+    &__text {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-align: center;
+      text-overflow: clip;
+      padding: 0 0 -$spacing-4 0;
+    }
+
+    &::before {
+      content: '';
+      width: $spacing-20;
+      height: $spacing-2;
+      background-color: $orange;
+      display: flex;
+      position: absolute;
+      left: calc(50% - $spacing-10);
+      bottom: 0;
+    }
+  }
+
+  &__price {
+    &__currency {
+      font-size: 0.65rem;
+      margin: 0 $spacing-4 0 0;
+    }
+
+    &__int {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    &__dec {
+      font-size: 0.8rem;
+    }
   }
 }

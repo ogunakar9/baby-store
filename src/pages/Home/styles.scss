@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .card-container {
   display: flex;
@@ -6,4 +6,5 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: $spacing-20;
+  padding: 1rem;
 }
