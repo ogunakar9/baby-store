@@ -1,5 +1,13 @@
 @import '../../styles/variables.scss';
 
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: $spacing-54;
+  padding: 1rem;
+}
+
 .card-container {
   display: flex;
   align-items: center;

@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import "./styles.scss";
-import Card from "../../components/Card";
-import { ICardProps } from "../../components/Card/types";
+import { useEffect, useState } from 'react';
+import './styles.scss';
+import Card from '../../components/Card';
+import Filters from '../../components/Filters';
+import { ICardProps } from '../../components/Card/types';
 
 const Home = () => {
   const [products, setProducts] = useState<ICardProps[]>([]);
 
   useEffect(() => {
     const productGetter = async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
+      const res = await fetch('https://fakestoreapi.com/products');
       const json = await res.json();
       setProducts(json);
     };
@@ -30,10 +31,13 @@ const Home = () => {
   // }
 
   return (
-    <div className="card-container">
-      {products.map((product) => (
-        <Card {...product} key={product.id} />
-      ))}
+    <div className="wrapper">
+      <Filters />
+      <div className="card-container">
+        {products.map((product) => (
+          <Card {...product} key={product.id} />
+        ))}
+      </div>
     </div>
   );
 };
