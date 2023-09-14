@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './styles.scss';
 import Card from '../../components/Card';
 import Filters from '../../components/Filters';
+import Footer from '../../components/Footer';
 import { ICardProps } from '../../components/Card/types';
 
 const Home = () => {
@@ -30,14 +31,33 @@ const Home = () => {
   //     }
   // }
 
+  // useEffect(() => {
+  //   const response = await fetch("", {
+  //     method: "POST", // *GET, POST, PUT, DELETE, etc.
+  //     mode: "cors", // no-cors, *cors, same-origin
+  //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+  //     credentials: "same-origin", // include, *same-origin, omit
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // 'Content-Type': 'application/x-www-form-urlencoded',
+  //     },
+  //     redirect: "follow", // manual, *follow, error
+  //     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+  //     body: JSON.stringify(data), // body data type must match "Content-Type" header
+  //   });
+  // }, [products]);
+
   return (
-    <div className="wrapper">
-      <Filters />
-      <div className="card-container">
-        {products.map((product) => (
-          <Card {...product} key={product.id} />
-        ))}
+    <div className="container">
+      <div className="container__items">
+        <Filters />
+        <div className="container__items__cards">
+          {products.map((product) => (
+            <Card {...product} key={product.id} />
+          ))}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

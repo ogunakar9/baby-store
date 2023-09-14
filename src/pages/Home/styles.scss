@@ -1,18 +1,23 @@
 @import '../../styles/variables.scss';
 
-.wrapper {
+.container {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: $spacing-54;
-  padding: 1rem;
-}
+  flex-direction: column;
 
-.card-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: $spacing-20;
-  padding: 1rem;
+  &__items {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: $spacing-54;
+    padding: 1rem;
+
+    &__cards {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: $spacing-20;
+      padding: 1rem;
+    }
+  }
 }

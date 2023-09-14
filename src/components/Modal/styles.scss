@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.modal {
+  z-index: 100;
+  background-color: $dark-grey;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.95;
+}

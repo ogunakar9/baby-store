@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.form {
+  background-color: $white;
+  padding: $spacing-20;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: $spacing-12;
+  width: 600px;
+  height: 300px;
+  max-width: 100%;
+
+  @media screen and (max-width: $small) {
+    width: 100%;
+  }
+
+  &__title {
+    font-size: $fs-1;
+  }
+
+  &__input {
+    width: 99%;
+
+    &__item {
+      width: 100%;
+    }
+  }
+}
