@@ -63,7 +63,7 @@
       overflow: hidden;
       text-align: center;
       text-overflow: clip;
-      padding: 0 0 -$spacing-4 0;
+      padding: 0 0 (-$spacing-4) 0;
     }
 
     &::before {

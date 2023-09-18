@@ -1,7 +1,7 @@
-import './styles.scss';
 import { createPortal } from 'react-dom';
 import { IModalProps } from './types';
 import { useEffect } from 'react';
+import './styles.scss';
 
 const Modal: React.FC<IModalProps> = ({ children, isVisible }) => {
   useEffect(() => {

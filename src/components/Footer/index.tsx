@@ -1,12 +1,21 @@
+import { useState, useRef, forwardRef } from 'react';
+// import useOutSideClick from '../../hooks/useOutSideClick';
 import './styles.scss';
-import { useState } from 'react';
 import Modal from '../Modal';
 import ContactForm from '../ContactForm';
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const formRef = useRef(null);
+  //TODO: implement custom hook
+  // const isClickedOutside = useOutSideClick(formRef);
+
   const toggleVisibility = () => setIsVisible(!isVisible);
   const handleClick = () => toggleVisibility();
+
+  const InnerElement = forwardRef(() => {
+    return <ContactForm formRef={formRef} setIsVisible={setIsVisible} />;
+  });
 
   return (
     <div className="footer">
@@ -15,7 +24,7 @@ const Footer = () => {
         Contact us
       </button>
       <Modal isVisible={isVisible}>
-        <ContactForm />
+        <InnerElement />
       </Modal>
     </div>
   );
