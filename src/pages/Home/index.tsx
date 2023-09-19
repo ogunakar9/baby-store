@@ -4,6 +4,7 @@ import Card from '../../components/Card';
 import Filters from '../../components/Filters';
 import Footer from '../../components/Footer';
 import { ICardProps } from '../../components/Card/types';
+import Header from '../../components/Header';
 
 const Home = () => {
   const [products, setProducts] = useState<ICardProps[]>([]);
@@ -49,6 +50,7 @@ const Home = () => {
 
   return (
     <div className="container">
+      <Header />
       <div className="container__items">
         <Filters />
         <div className="container__items__cards">
