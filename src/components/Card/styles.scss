@@ -32,6 +32,10 @@
       color: $dark-grey;
       border: none;
 
+      &:hover {
+        cursor: pointer;
+      }
+
       // padding: $spacing-2;
       // height: $spacing-22;
       // width: $spacing-22;

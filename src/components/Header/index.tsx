@@ -4,7 +4,9 @@ import './styles.scss';
 const Header = () => {
   return (
     <div className="header">
-      <ShoppingCartCheckoutIcon className="header__icon" />
+      <button>
+        <ShoppingCartCheckoutIcon className="header__icon" />
+      </button>
     </div>
   );
 };

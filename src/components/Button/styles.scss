@@ -8,4 +8,8 @@
   font-size: 0.9rem;
   border: none;
   border-radius: $spacing-8;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

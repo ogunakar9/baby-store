@@ -26,8 +26,6 @@ const Card = (props: ICardProps) => {
     priceDigit = '.' + priceDigit;
   }
 
-  console.log('value', items);
-
   const addItemToCart = () => {
     //prevent adding same item
     if (items.includes(props)) {
