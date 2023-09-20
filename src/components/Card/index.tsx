@@ -4,10 +4,14 @@ import './styles.scss';
 import { ICardProps } from './types';
 import Button from '../Button';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectCartItems, addItem } from '../../features/cart/cartSlice';
+import {
+  selectCartItems,
+  addItem,
+  removeItem,
+} from '../../features/cart/cartSlice';
 
 const Card = (props: ICardProps) => {
-  const value = useAppSelector(selectCartItems);
+  const items = useAppSelector(selectCartItems);
   const dispatch = useAppDispatch();
 
   const { id, title, price, description, category, image, rating } = props;
@@ -22,19 +26,34 @@ const Card = (props: ICardProps) => {
     priceDigit = '.' + priceDigit;
   }
 
-  console.log('value', value);
+  console.log('value', items);
 
   const addItemToCart = () => {
     //prevent adding same item
-    if (value.includes(props)) {
+    if (items.includes(props)) {
       return;
     }
     dispatch(addItem(props));
   };
 
+  const removeItemFromCart = () => {
+    dispatch(removeItem(props));
+  };
+
+  const RemoveItemButton = () => {
+    return items.includes(props) ? (
+      <button className="card__image__close" onClick={removeItemFromCart}>
+        <CloseIcon fontSize="small" />
+      </button>
+    ) : (
+      <></>
+    );
+  };
+
   return (
     <div className="card">
       <div className="card__image">
+        <RemoveItemButton />
         <img className="card__image__el" src={image} alt={title} />
         <div className="card__image__rating">
           <span className="card__image__rating__text">{rate}</span>

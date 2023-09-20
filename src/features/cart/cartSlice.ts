@@ -4,11 +4,11 @@ import { fetchCount } from './cartAPI';
 import { ICardProps } from '../../components/Card/types';
 
 export interface CartState {
-  value: ICardProps[];
+  items: ICardProps[];
 }
 
 const initialState: CartState = {
-  value: [],
+  items: [],
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -37,10 +37,10 @@ export const cartSlice = createSlice({
       // immutable state based off those changes
 
       const addedItem = action.payload;
-      state.value.push(addedItem);
+      state.items.push(addedItem);
     },
     removeItem: (state, action: PayloadAction<ICardProps>) => {
-      state.value = state.value.filter((item) => {
+      state.items = state.items.filter((item) => {
         return item.id !== action.payload.id;
       });
     },
@@ -67,7 +67,7 @@ export const { addItem, removeItem } = cartSlice.actions;
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectCartItems = (state: RootState) => state.cart.value;
+export const selectCartItems = (state: RootState) => state.cart.items;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
