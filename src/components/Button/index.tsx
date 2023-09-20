@@ -4,7 +4,12 @@ import { IButtonProps } from './types';
 const Button = (props: IButtonProps) => {
   const { handleClick } = props;
   return (
-    <button className="button" onClick={handleClick}>
+    <button
+      className="button"
+      onClick={() => {
+        handleClick();
+      }}
+    >
       Add to cart
     </button>
   );

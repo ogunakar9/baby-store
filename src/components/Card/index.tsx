@@ -1,9 +1,15 @@
+import StarBorderPurple500Icon from '@mui/icons-material/StarBorderPurple500';
+import CloseIcon from '@mui/icons-material/Close';
 import './styles.scss';
 import { ICardProps } from './types';
 import Button from '../Button';
-import StarBorderPurple500Icon from '@mui/icons-material/StarBorderPurple500';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectCartItems, addItem } from '../../features/cart/cartSlice';
 
 const Card = (props: ICardProps) => {
+  const value = useAppSelector(selectCartItems);
+  const dispatch = useAppDispatch();
+
   const { id, title, price, description, category, image, rating } = props;
   const { rate, count } = rating;
 
@@ -15,6 +21,16 @@ const Card = (props: ICardProps) => {
   if (priceDigit) {
     priceDigit = '.' + priceDigit;
   }
+
+  console.log('value', value);
+
+  const addItemToCart = () => {
+    //prevent adding same item
+    if (value.includes(props)) {
+      return;
+    }
+    dispatch(addItem(props));
+  };
 
   return (
     <div className="card">
@@ -33,7 +49,7 @@ const Card = (props: ICardProps) => {
         <span className="card__price__int">{priceInt}</span>
         <span className="card__price__digit">{priceDigit}</span>
       </div>
-      <Button handleClick={() => {}} />
+      <Button handleClick={addItemToCart} />
     </div>
   );
 };
