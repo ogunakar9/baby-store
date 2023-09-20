@@ -4,11 +4,17 @@
   justify-content: flex-end;
   width: 100%;
 
-  &__icon {
-    margin: 1rem 1rem 0 0;
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    &:hover {
-      cursor: pointer;
+    &__icon {
+      margin: 1rem 1rem 0 0;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
