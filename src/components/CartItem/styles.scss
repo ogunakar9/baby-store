@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+.cart__item {
+  display: flex;
+  gap: $spacing-20;
+  align-items: center;
+  justify-content: space-between;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-16;
+
+    &__title {
+      font-size: 1rem;
+    }
+
+    &__image {
+      height: 50px;
+      object-fit: contain;
+    }
+  }
+
+  &__active {
+    display: flex;
+    align-items: center;
+    gap: $spacing-24;
+
+    &__price {
+      &__currency {
+        font-size: 0.7rem;
+        margin: 0 $spacing-4 0 0;
+        color: $green;
+      }
+
+      &__int {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+
+    &__icon {
+      height: 30px;
+      width: 30px;
+      border: 2px solid $red;
+      color: $red;
+      border-radius: $spacing-8;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+}

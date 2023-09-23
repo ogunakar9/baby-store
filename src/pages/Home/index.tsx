@@ -11,9 +11,16 @@ const Home = () => {
 
   useEffect(() => {
     const productGetter = async () => {
-      const res = await fetch('https://fakestoreapi.com/products');
-      const json = await res.json();
-      setProducts(json);
+      let json;
+      if (!localStorage.getItem('items')) {
+        const res = await fetch('https://fakestoreapi.com/products');
+        json = await res.json();
+
+        localStorage.setItem('items', JSON.stringify(json));
+      }
+
+      const items = localStorage.getItem('items');
+      setProducts(json || (items && JSON.parse(items)));
     };
 
     productGetter();

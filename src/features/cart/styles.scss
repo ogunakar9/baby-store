@@ -1,42 +1,23 @@
 @import '../../styles/variables.scss';
 
 .cart {
-  display: grid;
-  grid-template-columns: minmax(100px, 1fr);
-  grid-template-rows: auto;
-  // grid-template-areas:
-  //   'header header header header'
-  //   'main main . sidebar'
-  //   'footer footer footer footer';
-}
-
-.form {
-  background-color: $white;
-  padding: $spacing-20;
-  opacity: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  gap: $spacing-12;
-  width: 600px;
-  height: 300px;
-  max-width: 100%;
+  // align-items: center;
+  // justify-content: space-between;
+  background-color: $white;
+  gap: $spacing-20;
+  max-width: 1280px;
+  width: 50%;
+  padding: 1rem;
   border-radius: $spacing-8;
 
-  @media screen and (max-width: $small) {
+  @media screen and (max-width: $medium) {
     width: 100%;
   }
 
   &__title {
-    font-size: $fs-1;
-  }
-
-  &__input {
-    width: 99%;
-
-    &__item {
-      width: 99%;
-    }
+    text-align: center;
+    font-size: 1.5rem;
   }
 }

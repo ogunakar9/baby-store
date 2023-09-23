@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import {
-  // incrementAsync,
-  // incrementIfOdd,
-  selectCartItems,
-  addItem,
-} from './cartSlice';
+import { selectCartItems } from './cartSlice';
 import './styles.scss';
+import CartItem from '../../components/CartItem';
 
 const Cart = (props: IFormProps) => {
   const { formRef, setIsVisible } = props;
@@ -28,11 +24,18 @@ const Cart = (props: IFormProps) => {
     };
   }, [formRef, setIsVisible]);
 
+  useEffect(() => {
+    if (!items.length) {
+      setIsVisible(false);
+    }
+  }, [items, setIsVisible]);
+
   return (
     <div className="cart" ref={formRef}>
-      {items.map((item) => {
-        console.log(item);
-        return <></>;
+      <span className="cart__title">Products in your cart</span>
+      {items.map(({ title, price, description, image, id }) => {
+        const itemProps = { title, price, description, image, id };
+        return <CartItem key={id} {...itemProps} />;
       })}
     </div>
   );

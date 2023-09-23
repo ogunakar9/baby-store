@@ -8,8 +8,7 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
   const formRef = useRef(null);
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
-  const handleClick = () => toggleVisibility();
+  const handleClick = () => setIsVisible(!isVisible);
 
   const InnerElement = forwardRef(() => {
     return <Cart formRef={formRef} setIsVisible={setIsVisible} />;
