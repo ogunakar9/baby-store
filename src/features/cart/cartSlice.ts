@@ -39,9 +39,9 @@ export const cartSlice = createSlice({
       const addedItem = action.payload;
       state.items.push(addedItem);
     },
-    removeItem: (state, action: PayloadAction<ICardProps>) => {
+    removeItem: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((item) => {
-        return item.id !== action.payload.id;
+        return item.id !== action.payload;
       });
     },
   },

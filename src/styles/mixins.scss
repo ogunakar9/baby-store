@@ -1,0 +1,10 @@
+// Sets the style to pseudo selectors AND base default anchor
+@mixin nonDisabledButtonStyle {
+  &:hover:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+button {
+  @include nonDisabledButtonStyle;
+}

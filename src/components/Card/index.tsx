@@ -36,7 +36,7 @@ const Card = (props: ICardProps) => {
   };
 
   const removeItemFromCart = () => {
-    dispatch(removeItem(props));
+    dispatch(removeItem(props.id));
   };
 
   const isItemSelected = useMemo(() => items.includes(props), [props, items]);

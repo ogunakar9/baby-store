@@ -3,8 +3,13 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import './styles.scss';
 import Modal from '../Modal';
 import Cart from '../../features/cart/Cart';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectCartItems } from '../../features/cart/cartSlice';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const items = useAppSelector(selectCartItems);
+
   const [isVisible, setIsVisible] = useState(false);
   const formRef = useRef(null);
 
@@ -17,7 +22,11 @@ const Header = () => {
   //TODO: add badge to shoppingcart icon
   return (
     <div className="header">
-      <button className="header__button" onClick={handleClick}>
+      <button
+        className="header__button"
+        onClick={handleClick}
+        disabled={!items.length}
+      >
         <ShoppingCartCheckoutIcon className="header__button__icon" />
       </button>
       <Modal isVisible={isVisible}>

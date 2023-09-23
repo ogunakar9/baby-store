@@ -8,7 +8,7 @@ const CartItem = (props: IItemProps) => {
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    dispatch(removeItem(props));
+    dispatch(removeItem(id));
   };
 
   return (
