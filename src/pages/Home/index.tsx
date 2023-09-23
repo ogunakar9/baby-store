@@ -6,15 +6,26 @@ import Filters from '../../components/Filters';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { products, fetchProducts } from '../../features/cart/cartSlice';
+import {
+  products,
+  fetchProducts,
+  categories,
+  fetchCategories,
+} from '../../features/cart/cartSlice';
 
 const Home = () => {
-  const items = useAppSelector(products);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  const items = useAppSelector(products);
+  const cats = useAppSelector(categories);
 
   // {
   //     "id": 1,
@@ -51,12 +62,12 @@ const Home = () => {
       <div className="container__items">
         <Filters />
         <div className="container__items__cards">
-          {items.map((product) => (
+          {items?.map((product) => (
             <Card {...product} key={product.id} />
           ))}
         </div>
       </div>
-      {!items.length && <CircularProgress className="container__loader" />}
+      {!items?.length && <CircularProgress className="container__loader" />}
       <Footer />
     </div>
   );

@@ -1,22 +1,19 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  PayloadAction,
-  CaseReducer,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
-import { productsRequest } from './cartAPI';
+import { productsRequest, categoriesRequest } from './cartAPI';
 import { ICardProps } from '../../components/Card/types';
 
 export interface CartState {
   products: ICardProps[];
   cartItems: ICardProps[];
+  categories: string[];
   status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: CartState = {
   products: [],
   cartItems: [],
+  categories: [],
   status: 'idle',
 };
 
@@ -33,9 +30,23 @@ export const fetchProducts = createAsyncThunk(
 
       localStorage.setItem('items', JSON.stringify(res));
       return res;
+    } else {
+      return JSON.parse(localStorage.getItem('items') as string);
     }
+  }
+);
 
-    return JSON.parse(localStorage.getItem('items') as string);
+export const fetchCategories = createAsyncThunk(
+  'cart/fetchCategories',
+  async () => {
+    if (!localStorage.getItem('cats')) {
+      const res = await categoriesRequest();
+
+      localStorage.setItem('cats', JSON.stringify(res));
+      return res;
+    } else {
+      return JSON.parse(localStorage.getItem('cats') as string);
+    }
 
     // The value we return becomes the `fulfilled` action payload
   }
@@ -71,7 +82,13 @@ export const cartSlice = createSlice({
       )
       .addCase(fetchProducts.rejected, (state) => {
         state.status = 'failed';
-      });
+      })
+      .addCase(
+        fetchCategories.fulfilled,
+        (state, action: PayloadAction<string[]>) => {
+          state.categories = action.payload;
+        }
+      );
   },
 });
 
@@ -79,5 +96,6 @@ export const { addItem, removeItem } = cartSlice.actions;
 
 export const products = (state: RootState) => state.cart.products;
 export const cartItems = (state: RootState) => state.cart.cartItems;
+export const categories = (state: RootState) => state.cart.categories;
 
 export default cartSlice.reducer;
