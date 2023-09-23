@@ -2,15 +2,16 @@ import './styles.scss';
 import { IButtonProps } from './types';
 
 const Button = (props: IButtonProps) => {
-  const { handleClick } = props;
+  const { handleClick, type } = props;
+
   return (
     <button
-      className="button"
+      className={`button ${type === 'add' ? 'remove' : 'add'}`}
       onClick={() => {
         handleClick();
       }}
     >
-      Add to cart
+      {type === 'add' ? 'Remove from cart' : 'Add to cart'}
     </button>
   );
 };

@@ -1,7 +1,6 @@
 @import '../../styles/variables.scss';
 
 .button {
-  background: black;
   color: white;
   padding: $spacing-8 $spacing-12;
   width: 100%;
@@ -11,4 +10,12 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.add {
+  background: $green;
+}
+
+.remove {
+  background: $orange-variant1;
 }

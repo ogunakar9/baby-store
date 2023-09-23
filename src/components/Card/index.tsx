@@ -53,9 +53,9 @@ const Card = (props: ICardProps) => {
 
   const ButtonSection = () => {
     return isItemSelected ? (
-      <Button handleClick={removeItemFromCart} />
+      <Button handleClick={removeItemFromCart} type="add" />
     ) : (
-      <Button handleClick={addItemToCart} />
+      <Button handleClick={addItemToCart} type="remove" />
     );
   };
 
