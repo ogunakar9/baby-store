@@ -80,6 +80,7 @@ export const selectCartItems = (state: RootState) => state.cart.items;
 //     }
 //   };
 
+//TODO: get cartItems from firebase with thunk
 // export const incrementIfOdd =
 //   (cartItem: ICardProps): AppThunk =>
 //   (dispatch, getState) => {

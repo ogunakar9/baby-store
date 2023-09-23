@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import StarBorderPurple500Icon from '@mui/icons-material/StarBorderPurple500';
 import CloseIcon from '@mui/icons-material/Close';
 import './styles.scss';
@@ -38,8 +39,10 @@ const Card = (props: ICardProps) => {
     dispatch(removeItem(props));
   };
 
+  const isItemSelected = useMemo(() => items.includes(props), [props, items]);
+
   const RemoveItemButton = () => {
-    return items.includes(props) ? (
+    return isItemSelected ? (
       <button className="card__image__close" onClick={removeItemFromCart}>
         <CloseIcon fontSize="small" />
       </button>
@@ -48,8 +51,16 @@ const Card = (props: ICardProps) => {
     );
   };
 
+  const ButtonSection = () => {
+    return isItemSelected ? (
+      <Button handleClick={removeItemFromCart} />
+    ) : (
+      <Button handleClick={addItemToCart} />
+    );
+  };
+
   return (
-    <div className="card">
+    <div className={`card ${isItemSelected ? 'selected' : ''}`}>
       <div className="card__image">
         <RemoveItemButton />
         <img className="card__image__el" src={image} alt={title} />
@@ -66,7 +77,7 @@ const Card = (props: ICardProps) => {
         <span className="card__price__int">{priceInt}</span>
         <span className="card__price__digit">{priceDigit}</span>
       </div>
-      <Button handleClick={addItemToCart} />
+      <ButtonSection />
     </div>
   );
 };
