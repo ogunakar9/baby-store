@@ -7,6 +7,7 @@ import CartItem from '../../components/CartItem';
 const Cart = (props: IFormProps) => {
   const { formRef, setIsVisible } = props;
   const items = useAppSelector(selectCartItems);
+
   const dispatch = useAppDispatch();
 
   //TODO: extract to custom hook

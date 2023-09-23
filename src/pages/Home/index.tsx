@@ -1,30 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import './styles.scss';
 import Card from '../../components/Card';
 import Filters from '../../components/Filters';
 import Footer from '../../components/Footer';
-import { ICardProps } from '../../components/Card/types';
 import Header from '../../components/Header';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectCartItems, fetchProducts } from '../../features/cart/cartSlice';
 
 const Home = () => {
-  const [products, setProducts] = useState<ICardProps[]>([]);
+  const items = useAppSelector(selectCartItems);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const productGetter = async () => {
-      let json;
-      if (!localStorage.getItem('items')) {
-        const res = await fetch('https://fakestoreapi.com/products');
-        json = await res.json();
-
-        localStorage.setItem('items', JSON.stringify(json));
-      }
-
-      const items = localStorage.getItem('items');
-      setProducts(json || (items && JSON.parse(items)));
-    };
-
-    productGetter();
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   // {
   //     "id": 1,
@@ -61,11 +51,12 @@ const Home = () => {
       <div className="container__items">
         <Filters />
         <div className="container__items__cards">
-          {products.map((product) => (
+          {items.map((product) => (
             <Card {...product} key={product.id} />
           ))}
         </div>
       </div>
+      {!items.length && <CircularProgress className="container__loader" />}
       <Footer />
     </div>
   );

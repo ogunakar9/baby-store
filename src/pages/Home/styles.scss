@@ -1,8 +1,9 @@
 @import '../../styles/variables.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  height: 100vh;
 
   &__items {
     display: flex;
@@ -19,5 +20,11 @@
       gap: $spacing-20;
       padding: 1rem;
     }
+  }
+
+  &__loader {
+    align-self: center;
+    justify-self: center;
+    color: $dark-grey !important;
   }
 }
