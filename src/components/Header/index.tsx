@@ -4,11 +4,11 @@ import './styles.scss';
 import Modal from '../Modal';
 import Cart from '../../features/cart/Cart';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectCartItems } from '../../features/cart/cartSlice';
+import { cartItems } from '../../features/cart/cartSlice';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const items = useAppSelector(selectCartItems);
+  const items = useAppSelector(cartItems);
 
   const [isVisible, setIsVisible] = useState(false);
   const formRef = useRef(null);

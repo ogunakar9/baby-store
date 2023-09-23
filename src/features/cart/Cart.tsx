@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectCartItems } from './cartSlice';
+import { cartItems } from './cartSlice';
 import './styles.scss';
 import CartItem from '../../components/CartItem';
 
 const Cart = (props: IFormProps) => {
   const { formRef, setIsVisible } = props;
-  const items = useAppSelector(selectCartItems);
+  const items = useAppSelector(cartItems);
 
   const dispatch = useAppDispatch();
 

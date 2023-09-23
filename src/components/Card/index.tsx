@@ -6,13 +6,15 @@ import { ICardProps } from './types';
 import Button from '../Button';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
-  selectCartItems,
+  cartItems,
+  products,
   addItem,
   removeItem,
 } from '../../features/cart/cartSlice';
 
 const Card = (props: ICardProps) => {
-  const items = useAppSelector(selectCartItems);
+  const selectedItems = useAppSelector(cartItems);
+  const allItems = useAppSelector(products);
   const dispatch = useAppDispatch();
 
   const { id, title, price, description, category, image, rating } = props;
@@ -29,7 +31,7 @@ const Card = (props: ICardProps) => {
 
   const addItemToCart = () => {
     //prevent adding same item
-    if (items.includes(props)) {
+    if (selectedItems.includes(props)) {
       return;
     }
     dispatch(addItem(props));
@@ -39,7 +41,10 @@ const Card = (props: ICardProps) => {
     dispatch(removeItem(props.id));
   };
 
-  const isItemSelected = useMemo(() => items.includes(props), [props, items]);
+  const isItemSelected = useMemo(
+    () => selectedItems.includes(props),
+    [props, selectedItems]
+  );
 
   const RemoveItemButton = () => {
     return isItemSelected ? (

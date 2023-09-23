@@ -9,12 +9,14 @@ import { productsRequest } from './cartAPI';
 import { ICardProps } from '../../components/Card/types';
 
 export interface CartState {
-  items: ICardProps[];
+  products: ICardProps[];
+  cartItems: ICardProps[];
   status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: CartState = {
-  items: [],
+  products: [],
+  cartItems: [],
   status: 'idle',
 };
 
@@ -46,10 +48,10 @@ export const cartSlice = createSlice({
   reducers: {
     addItem: (state, action: PayloadAction<ICardProps>) => {
       const addedItem = action.payload;
-      state.items.push(addedItem);
+      state.cartItems.push(addedItem);
     },
     removeItem: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((item) => {
+      state.cartItems = state.cartItems.filter((item) => {
         return item.id !== action.payload;
       });
     },
@@ -64,7 +66,7 @@ export const cartSlice = createSlice({
         fetchProducts.fulfilled,
         (state, action: PayloadAction<ICardProps[]>) => {
           state.status = 'idle';
-          state.items = action.payload;
+          state.products = action.payload;
         }
       )
       .addCase(fetchProducts.rejected, (state) => {
@@ -75,6 +77,7 @@ export const cartSlice = createSlice({
 
 export const { addItem, removeItem } = cartSlice.actions;
 
-export const selectCartItems = (state: RootState) => state.cart.items;
+export const products = (state: RootState) => state.cart.products;
+export const cartItems = (state: RootState) => state.cart.cartItems;
 
 export default cartSlice.reducer;

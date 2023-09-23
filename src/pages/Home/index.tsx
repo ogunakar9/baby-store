@@ -6,10 +6,10 @@ import Filters from '../../components/Filters';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectCartItems, fetchProducts } from '../../features/cart/cartSlice';
+import { products, fetchProducts } from '../../features/cart/cartSlice';
 
 const Home = () => {
-  const items = useAppSelector(selectCartItems);
+  const items = useAppSelector(products);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
