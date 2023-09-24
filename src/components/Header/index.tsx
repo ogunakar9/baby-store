@@ -19,7 +19,6 @@ const Header = () => {
     return <Cart formRef={formRef} setIsVisible={setIsVisible} />;
   });
 
-  //TODO: add badge to shoppingcart icon
   return (
     <div className="header">
       <button
@@ -28,6 +27,7 @@ const Header = () => {
         disabled={!items.length}
       >
         <ShoppingCartCheckoutIcon className="header__button__icon" />
+        <span className="header__button__badge">{items.length}</span>
       </button>
       <Modal isVisible={isVisible}>
         <InnerElement />
