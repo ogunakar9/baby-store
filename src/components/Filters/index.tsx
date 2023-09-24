@@ -1,30 +1,21 @@
-import { useState } from 'react';
-import './styles.scss';
-import { IFiltersProps } from './types';
 import Slider from '@mui/material/Slider';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import './styles.scss';
+import { IFiltersProps } from './types';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { categories, setFilters, filters } from '../../features/cart/cartSlice';
 
 const Filters = (props: IFiltersProps) => {
-  const [isMen, setIsMen] = useState(false);
-  const [isWomen, setIsWomen] = useState(false);
+  const categoryItems = useAppSelector(categories);
+  const activeFilters = useAppSelector(filters);
+  const dispatch = useAppDispatch();
 
-  const toggleState = (state: boolean) => !state;
-
-  const handleGenderSelection = (gender: string) => {
-    if (gender === 'men') {
-      setIsMen(toggleState(isMen));
-
-      if (isWomen) {
-        setIsWomen(toggleState(isWomen));
-      }
-    } else {
-      setIsWomen((prevState) => !prevState);
-
-      if (isMen) {
-        setIsMen(toggleState(isMen));
-      }
-    }
+  // type SelectedCategory = { selectedCategories: string };
+  const handleCatSelection = (cat: string) => {
+    dispatch(setFilters({ selectedCategories: cat }));
   };
+
+  console.log('activeFilters', activeFilters);
 
   //TODO: make the filter title an accordion
 
@@ -33,27 +24,6 @@ const Filters = (props: IFiltersProps) => {
       <div className="filters__title">
         <span>Filters</span>
         <FilterAltIcon className="filters__title__icon" />
-      </div>
-      <div className="filters__gender">
-        <span>Gender </span>
-        <div className="filters__gender__options">
-          <button
-            onClick={() => handleGenderSelection('men')}
-            className={`filters__gender__options__button ${
-              isMen ? '--active' : ''
-            }`}
-          >
-            Men
-          </button>
-          <button
-            onClick={() => handleGenderSelection('women')}
-            className={`filters__gender__options__button ${
-              isWomen ? '--active' : ''
-            }`}
-          >
-            Women
-          </button>
-        </div>
       </div>
       <div className="filters__slider">
         <span>Price</span>
@@ -72,6 +42,23 @@ const Filters = (props: IFiltersProps) => {
           aria-label="Filter-by-rating"
           valueLabelDisplay="auto"
         />
+      </div>
+      <div className="filters__gender__options">
+        {categoryItems.map((category) => {
+          return (
+            <button
+              key={category}
+              onClick={() => handleCatSelection(category)}
+              className={`filters__gender__options__button ${
+                activeFilters.selectedCategories?.includes(category)
+                  ? '--active'
+                  : ''
+              }`}
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

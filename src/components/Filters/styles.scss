@@ -37,7 +37,8 @@
     &__options {
       display: flex;
       align-items: center;
-      gap: $spacing-12;
+      gap: $spacing-16;
+      flex-wrap: wrap;
 
       &__button {
         background: none;

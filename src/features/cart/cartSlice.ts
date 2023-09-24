@@ -8,12 +8,24 @@ export interface CartState {
   cartItems: ICardProps[];
   categories: string[];
   status: 'idle' | 'loading' | 'failed';
+  filters: IFilters;
+}
+
+interface IFilters {
+  selectedCategories?: string[];
+  price?: number;
+  rating?: number;
 }
 
 const initialState: CartState = {
   products: [],
   cartItems: [],
   categories: [],
+  filters: {
+    selectedCategories: [],
+    price: 0,
+    rating: 0,
+  } as IFilters,
   status: 'idle',
 };
 
@@ -66,6 +78,23 @@ export const cartSlice = createSlice({
         return item.id !== action.payload;
       });
     },
+    setFilters: (state, action: PayloadAction<any>) => {
+      const typeOfFilter = Object.keys(action.payload)[0] as keyof IFilters;
+      if (typeOfFilter === 'selectedCategories') {
+        const selectedCat: string = action.payload[typeOfFilter];
+
+        if (!state.filters.selectedCategories?.includes(selectedCat)) {
+          state.filters.selectedCategories?.push(selectedCat);
+        } else {
+          state.filters.selectedCategories =
+            state.filters.selectedCategories.filter(
+              (item) => item !== selectedCat
+            );
+        }
+      } else {
+        state.filters[typeOfFilter] = action.payload;
+      }
+    },
   },
 
   extraReducers: (builder) => {
@@ -92,10 +121,11 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, setFilters } = cartSlice.actions;
 
 export const products = (state: RootState) => state.cart.products;
 export const cartItems = (state: RootState) => state.cart.cartItems;
 export const categories = (state: RootState) => state.cart.categories;
+export const filters = (state: RootState) => state.cart.filters;
 
 export default cartSlice.reducer;
