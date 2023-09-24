@@ -15,7 +15,19 @@ const Filters = (props: IFiltersProps) => {
     dispatch(setFilters({ selectedCategories: cat }));
   };
 
-  console.log('activeFilters', activeFilters);
+  const handleRateChange = (
+    event: Event | React.SyntheticEvent<Element, Event>,
+    value: number | number[]
+  ) => {
+    dispatch(setFilters({ rating: value as number }));
+  };
+
+  const handlePriceChange = (
+    event: Event | React.SyntheticEvent<Element, Event>,
+    value: number | number[]
+  ) => {
+    dispatch(setFilters({ price: value as number }));
+  };
 
   //TODO: make the filter title an accordion
 
@@ -32,6 +44,7 @@ const Filters = (props: IFiltersProps) => {
           size="small"
           aria-label="Filter-by-price"
           valueLabelDisplay="auto"
+          onChangeCommitted={handlePriceChange}
         />
       </div>
       <div className="filters__slider">
@@ -41,6 +54,7 @@ const Filters = (props: IFiltersProps) => {
           size="small"
           aria-label="Filter-by-rating"
           valueLabelDisplay="auto"
+          onChangeCommitted={handleRateChange}
         />
       </div>
       <div className="filters__gender__options">

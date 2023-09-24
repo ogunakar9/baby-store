@@ -92,7 +92,7 @@ export const cartSlice = createSlice({
             );
         }
       } else {
-        state.filters[typeOfFilter] = action.payload;
+        state.filters[typeOfFilter] = action.payload[typeOfFilter];
       }
     },
   },
