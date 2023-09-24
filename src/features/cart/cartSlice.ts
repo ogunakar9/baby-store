@@ -7,12 +7,19 @@ export interface CartState {
   products: ICardProps[];
   cartItems: ICardProps[];
   categories: string[];
-  status: 'idle' | 'loading' | 'failed';
   filters: IFilters;
+  status: 'idle' | 'loading' | 'failed';
+  filteredProducts?: ICardProps[];
 }
 
 interface IFilters {
   selectedCategories?: string[];
+  price?: number;
+  rating?: number;
+}
+
+interface IFilterPayload {
+  selectedCategories?: string;
   price?: number;
   rating?: number;
 }
@@ -29,11 +36,6 @@ const initialState: CartState = {
   status: 'idle',
 };
 
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched. Thunks are
-// typically used to make async requests.
 export const fetchProducts = createAsyncThunk(
   'cart/fetchProducts',
   async () => {
@@ -59,15 +61,13 @@ export const fetchCategories = createAsyncThunk(
     } else {
       return JSON.parse(localStorage.getItem('cats') as string);
     }
-
-    // The value we return becomes the `fulfilled` action payload
   }
 );
 
+//TODO: fix setfilters payload type
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     addItem: (state, action: PayloadAction<ICardProps>) => {
       const addedItem = action.payload;
@@ -78,10 +78,10 @@ export const cartSlice = createSlice({
         return item.id !== action.payload;
       });
     },
-    setFilters: (state, action: PayloadAction<any>) => {
+    setFilters: (state, action: PayloadAction<IFilterPayload>) => {
       const typeOfFilter = Object.keys(action.payload)[0] as keyof IFilters;
       if (typeOfFilter === 'selectedCategories') {
-        const selectedCat: string = action.payload[typeOfFilter];
+        const selectedCat = action.payload[typeOfFilter] as string;
 
         if (!state.filters.selectedCategories?.includes(selectedCat)) {
           state.filters.selectedCategories?.push(selectedCat);
@@ -95,6 +95,9 @@ export const cartSlice = createSlice({
         state.filters[typeOfFilter] = action.payload[typeOfFilter];
       }
     },
+    setFilteredItems: (state, action: PayloadAction<ICardProps[]>) => {
+      state.filteredProducts = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -107,6 +110,10 @@ export const cartSlice = createSlice({
         (state, action: PayloadAction<ICardProps[]>) => {
           state.status = 'idle';
           state.products = action.payload;
+
+          if (!state.filteredProducts) {
+            state.filteredProducts = action.payload;
+          }
         }
       )
       .addCase(fetchProducts.rejected, (state) => {
@@ -121,9 +128,46 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, setFilters } = cartSlice.actions;
+export const { addItem, removeItem, setFilters, setFilteredItems } =
+  cartSlice.actions;
+
+export const filterProducts = (): AppThunk => (dispatch, getState) => {
+  const state = getState();
+  const { selectedCategories, price, rating } = state.cart.filters;
+  const { products } = state.cart;
+
+  const filteredProducts = products.filter((item) => {
+    if (selectedCategories?.length) {
+      if (
+        !selectedCategories?.every((cat) => {
+          return item.category === cat;
+        })
+      ) {
+        return false;
+      }
+    }
+
+    if (price) {
+      if (item.price > price) {
+        return false;
+      }
+    }
+
+    if (rating) {
+      if (item.rating.rate < rating) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  dispatch(setFilteredItems(filteredProducts));
+};
 
 export const products = (state: RootState) => state.cart.products;
+export const filteredProducts = (state: RootState) =>
+  state.cart.filteredProducts;
 export const cartItems = (state: RootState) => state.cart.cartItems;
 export const categories = (state: RootState) => state.cart.categories;
 export const filters = (state: RootState) => state.cart.filters;

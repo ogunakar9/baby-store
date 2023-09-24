@@ -7,10 +7,9 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
-  products,
   fetchProducts,
-  categories,
   fetchCategories,
+  filteredProducts,
 } from '../../features/cart/cartSlice';
 
 const Home = () => {
@@ -24,8 +23,7 @@ const Home = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const items = useAppSelector(products);
-  const cats = useAppSelector(categories);
+  const items = useAppSelector(filteredProducts);
 
   // {
   //     "id": 1,

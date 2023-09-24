@@ -3,7 +3,12 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import './styles.scss';
 import { IFiltersProps } from './types';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { categories, setFilters, filters } from '../../features/cart/cartSlice';
+import {
+  categories,
+  setFilters,
+  filters,
+  filterProducts,
+} from '../../features/cart/cartSlice';
 
 const Filters = (props: IFiltersProps) => {
   const categoryItems = useAppSelector(categories);
@@ -13,6 +18,7 @@ const Filters = (props: IFiltersProps) => {
   // type SelectedCategory = { selectedCategories: string };
   const handleCatSelection = (cat: string) => {
     dispatch(setFilters({ selectedCategories: cat }));
+    dispatch(filterProducts());
   };
 
   const handleRateChange = (
@@ -20,6 +26,7 @@ const Filters = (props: IFiltersProps) => {
     value: number | number[]
   ) => {
     dispatch(setFilters({ rating: value as number }));
+    dispatch(filterProducts());
   };
 
   const handlePriceChange = (
@@ -27,6 +34,7 @@ const Filters = (props: IFiltersProps) => {
     value: number | number[]
   ) => {
     dispatch(setFilters({ price: value as number }));
+    dispatch(filterProducts());
   };
 
   //TODO: make the filter title an accordion
@@ -45,6 +53,7 @@ const Filters = (props: IFiltersProps) => {
           aria-label="Filter-by-price"
           valueLabelDisplay="auto"
           onChangeCommitted={handlePriceChange}
+          max={150}
         />
       </div>
       <div className="filters__slider">
@@ -55,6 +64,7 @@ const Filters = (props: IFiltersProps) => {
           aria-label="Filter-by-rating"
           valueLabelDisplay="auto"
           onChangeCommitted={handleRateChange}
+          max={5}
         />
       </div>
       <div className="filters__gender__options">
