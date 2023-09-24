@@ -11,6 +11,8 @@
   border: $spacing-1 solid $grey;
   border-radius: $spacing-8;
   padding: 1rem;
+  position: relative;
+  overflow: hidden;
 
   &:hover {
     //TODO: only show close icon with hover
@@ -119,4 +121,32 @@
 
 .selected {
   border-color: $orange;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -300%;
+    border-radius: $spacing-8;
+    background: linear-gradient(
+      to bottom,
+      $orange,
+      rgba(255, 255, 255, 0.5) 50%,
+      $orange
+    );
+    transition: background-color 1s ease-in;
+    animation: shine 1s forwards;
+    z-index: -1;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-color: $white;
+    transform: rotateZ(0deg) translate(-5em, 7.5em);
+  }
+
+  100% {
+    background-color: $orange;
+    transform: rotateZ(360deg) translate(-5em, 7.5em);
+  }
 }
