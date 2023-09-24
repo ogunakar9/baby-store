@@ -8,4 +8,6 @@
 
 - SCSS
 
-- Firebase
+- Redux-toolkit
+
+### Live demo [here](https://baby-store-alpha.vercel.app/)
