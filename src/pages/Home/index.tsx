@@ -10,10 +10,12 @@ import {
   fetchProducts,
   fetchCategories,
   filteredProducts,
+  status,
 } from '../../features/cart/cartSlice';
 
 const Home = () => {
   const dispatch = useAppDispatch();
+  const fetchStatus = useAppSelector(status);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -65,7 +67,9 @@ const Home = () => {
           ))}
         </div>
       </div>
-      {!items?.length && <CircularProgress className="container__loader" />}
+      {fetchStatus === 'loading' && (
+        <CircularProgress className="container__loader" />
+      )}
       <Footer />
     </div>
   );

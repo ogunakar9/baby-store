@@ -171,5 +171,6 @@ export const filteredProducts = (state: RootState) =>
 export const cartItems = (state: RootState) => state.cart.cartItems;
 export const categories = (state: RootState) => state.cart.categories;
 export const filters = (state: RootState) => state.cart.filters;
+export const status = (state: RootState) => state.cart.status;
 
 export default cartSlice.reducer;
