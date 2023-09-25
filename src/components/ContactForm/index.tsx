@@ -1,25 +1,11 @@
 import { IFormProps } from './types';
-import { useEffect } from 'react';
 import LockIcon from '@mui/icons-material/Lock';
 import './styles.scss';
+import { useOutSideClick } from '../../app/hooks';
 
 const Form = (props: IFormProps) => {
   const { formRef, setIsVisible } = props;
-
-  //TODO: extract to custom hook
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (formRef && !formRef.current?.contains(e.target as Node)) {
-        setIsVisible(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [formRef, setIsVisible]);
+  useOutSideClick(formRef, () => setIsVisible(false));
 
   return (
     <div className="form" ref={formRef}>
