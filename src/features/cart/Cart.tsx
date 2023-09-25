@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useOutSideClick } from '../../app/hooks';
 import { cartItems } from './cartSlice';
 import './styles.scss';
 import CartItem from '../../components/CartItem';
@@ -8,22 +8,7 @@ const Cart = (props: IFormProps) => {
   const { formRef, setIsVisible } = props;
   const items = useAppSelector(cartItems);
 
-  const dispatch = useAppDispatch();
-
-  //TODO: extract to custom hook
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (formRef && !formRef.current?.contains(e.target as Node)) {
-        setIsVisible(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [formRef, setIsVisible]);
+  useOutSideClick(formRef, () => setIsVisible(false));
 
   useEffect(() => {
     if (!items.length) {
