@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .container {
   display: grid;
@@ -24,10 +25,7 @@
     }
 
     &__cards {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
+      @include displayFlex(wrap);
       gap: $spacing-20;
       padding: 1rem;
     }

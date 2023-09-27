@@ -1,13 +1,11 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .footer {
   background-color: $green;
   color: $white;
   height: 150px;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  align-items: center;
+  @include displayFlex(nowrap, space-between, center, row);
   padding: 1rem;
 
   &__button {

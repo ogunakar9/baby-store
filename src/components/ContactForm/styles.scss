@@ -1,13 +1,11 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .form {
   background-color: $white;
   padding: $spacing-20;
   opacity: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  @include displayFlex(nowrap, center, center, column);
   gap: $spacing-12;
   width: 600px;
   height: 300px;

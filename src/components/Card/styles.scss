@@ -1,10 +1,8 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  @include displayFlex(nowrap, center, center, column);
   height: 400px;
   width: 300px;
   gap: $spacing-20;
@@ -14,16 +12,11 @@
   position: relative;
   overflow: hidden;
 
-  &:hover {
-    //TODO: only show close icon with hover
-  }
-
   &__image {
     position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
+    @include displayFlex(nowrap, center);
 
     &__close {
       background: none;
@@ -32,15 +25,15 @@
       left: 0;
       margin: 0;
       color: $dark-grey;
-
-      // padding: $spacing-2;
-      // height: $spacing-22;
-      // width: $spacing-22;
-      // display: flex;
-      // align-items: center;
-      // justify-content: center;
-      // border-radius: 50%;
-      // border: 1px solid $dark-grey;
+      padding: $spacing-2;
+      height: $spacing-22;
+      width: $spacing-22;
+      @include displayFlex(nowrap, center, center);
+      border-radius: 50%;
+      border: 2px solid $dark-grey;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s, visibility 0.4s;
     }
 
     &__el {
@@ -53,9 +46,7 @@
       position: absolute;
       right: 0;
       top: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include displayFlex(nowrap, space-between, center);
       gap: $spacing-4;
       background: black;
       padding: 0.5rem 0.8rem 0.5rem 1rem;
@@ -106,6 +97,7 @@
     &__currency {
       font-size: 0.65rem;
       margin: 0 $spacing-4 0 0;
+      color: $green;
     }
 
     &__int {
@@ -133,9 +125,15 @@
       rgba(255, 255, 255, 0.5) 50%,
       $orange
     );
-    transition: background-color 1s ease-in;
     animation: shine 1s forwards;
     z-index: -1;
+  }
+
+  &:hover {
+    .card__image__close {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
 

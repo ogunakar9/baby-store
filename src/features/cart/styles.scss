@@ -1,8 +1,8 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .cart {
-  display: flex;
-  flex-direction: column;
+  @include displayFlex(nowrap, flex-start, space-between, column);
   background-color: $white;
   gap: $spacing-20;
   max-width: 1280px;

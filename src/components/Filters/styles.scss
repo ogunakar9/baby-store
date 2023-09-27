@@ -1,17 +1,14 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .filters {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @include displayFlex(nowrap, center, flex-start, column);
   width: 100%;
   padding: 1rem;
   gap: $spacing-32;
 
   &__title {
-    display: flex;
-    justify-self: space-between;
-    align-items: center;
+    @include displayFlex(nowrap, space-between, center);
     gap: $spacing-8;
     font-weight: bold;
     font-size: 1.5rem;
@@ -24,10 +21,8 @@
   }
 
   &__gender {
-    display: flex;
+    @include displayFlex(nowrap, space-between, center);
     gap: $spacing-12;
-    justify-content: space-between;
-    align-items: center;
 
     &__title {
       font-weight: bold;

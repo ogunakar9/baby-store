@@ -1,15 +1,15 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .cart__item {
-  display: flex;
+  @include displayFlex(nowrap, space-between, center);
   gap: $spacing-20;
-  align-items: center;
-  justify-content: space-between;
+  border: 1px solid $grey;
+  padding: 1rem;
+  border-radius: $spacing-8;
 
   &__info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include displayFlex(nowrap, space-between, center);
     gap: $spacing-16;
 
     &__title {
@@ -23,8 +23,7 @@
   }
 
   &__active {
-    display: flex;
-    align-items: center;
+    @include displayFlex(nowrap, flex-start, center);
     gap: $spacing-24;
 
     &__price {
@@ -47,9 +46,7 @@
       color: $red;
       border-radius: $spacing-8;
       padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include displayFlex(nowrap, center, center);
     }
   }
 }
