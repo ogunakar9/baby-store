@@ -11,11 +11,25 @@ import {
   fetchCategories,
   filteredProducts,
   status,
+  products,
 } from '../../features/cart/cartSlice';
+// import { db } from '../../firebase.config';
+// import { collection, getDocs, collectionGroup } from 'firebase/firestore';
+// import {
+//   collectionGroup,
+//   query,
+//   where,
+//   getDocs,
+//   collection,
+//   Firestore,
+// } from 'firebase/firestore';
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const fetchStatus = useAppSelector(status);
+  const productItems = useAppSelector(products);
+
+  // console.log('productItems', productItems);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -26,6 +40,33 @@ const Home = () => {
   }, [dispatch]);
 
   const items = useAppSelector(filteredProducts);
+
+  //TODO: check out collectionGroup to retrive nested collections
+  // useEffect(() => {
+  //   const getter = async () => {
+  //     const museums = query(collectionGroup(db, 'products'));
+  //     const querySnapshot = await getDocs(museums);
+  //     querySnapshot.forEach((doc) => {
+  //       console.log(doc.id, ' => ', doc.data());
+  //     });
+  //   };
+
+  //   getter();
+  // }, []);
+
+  // useEffect(() => {
+  //   // Get a list of cities from your database
+  //   async function getCities(db: Firestore) {
+  //     const citiesCol = collection(db, 'products');
+  //     const citySnapshot = await getDocs(citiesCol);
+  //     const cityList = citySnapshot.docs.map((doc) => doc.data());
+  //     return cityList;
+  //   }
+
+  //   getCities(db).then((data) => {
+  //     console.log('data', data);
+  //   });
+  // }, [items]);
 
   // {
   //     "id": 1,

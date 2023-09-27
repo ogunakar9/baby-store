@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
-import { productsRequest, categoriesRequest } from './cartAPI';
+import { productsRequest, categoriesRequest, productGet } from './cartAPI';
 import { ICardProps } from '../../components/Card/types';
 
 export interface CartState {
@@ -40,7 +40,8 @@ export const fetchProducts = createAsyncThunk(
   'cart/fetchProducts',
   async () => {
     if (!localStorage.getItem('items')) {
-      const res = await productsRequest();
+      // const res = await productsRequest();
+      const res = await productGet();
 
       localStorage.setItem('items', JSON.stringify(res));
       return res;
