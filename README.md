@@ -2,7 +2,7 @@
 
 test
 
-### This is a simple e-commerce project featuring:
+### This is an e-commerce project featuring:
 
 - TypeScript
 
