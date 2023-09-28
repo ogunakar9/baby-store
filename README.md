@@ -1,7 +1,5 @@
 # E-commerce project
 
-test
-
 ### This is an e-commerce project featuring:
 
 - TypeScript
