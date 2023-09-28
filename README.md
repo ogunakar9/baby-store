@@ -1,4 +1,4 @@
-# E-commerce project
+# E-commerce project:
 
 ### This is an e-commerce project featuring:
 
