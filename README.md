@@ -12,4 +12,6 @@ test
 
 - Redux-toolkit
 
+- Firebase
+
 ### Live demo [here](https://baby-store-alpha.vercel.app/)
