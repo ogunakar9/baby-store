@@ -5,16 +5,10 @@ import './styles.scss';
 import { ICardProps } from './types';
 import Button from '../Button';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import {
-  cartItems,
-  products,
-  addItem,
-  removeItem,
-} from '../../features/cart/cartSlice';
+import { cartItems, addItem, removeItem } from '../../features/cart/cartSlice';
 
 const Card = (props: ICardProps) => {
   const selectedItems = useAppSelector(cartItems);
-  const allItems = useAppSelector(products);
   const dispatch = useAppDispatch();
 
   const { id, title, price, description, category, image, rating } = props;
@@ -41,10 +35,11 @@ const Card = (props: ICardProps) => {
     dispatch(removeItem(props.id));
   };
 
-  const isItemSelected = useMemo(
-    () => selectedItems.includes(props),
-    [props, selectedItems]
-  );
+  const isItemSelected = useMemo(() => {
+    const selectedIds = selectedItems.map((item) => item.id);
+
+    return selectedIds.includes(props.id);
+  }, [props, selectedItems]);
 
   const RemoveItemButton = () => {
     return isItemSelected ? (
